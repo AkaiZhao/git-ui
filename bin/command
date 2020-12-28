@@ -1,0 +1,65 @@
+#!/usr/bin/env node
+
+const chalk = require('chalk')
+const program = require('commander')
+const camelize = require('camelize')
+const packageJson = require('../../package.json')
+
+program
+  .version(`@react-lib ${require('../../package.json').version}`)
+  .usage('<command> [options]')
+
+program
+  .command('create <library-name>')
+  .description('create a new react library')
+  .action((name, cmd) => {
+
+  })
+
+program
+  .command('info')
+  .description('print debugging information about your environment')
+  .action(cmd => {
+    console.log(chalk.bold('\nEnv Info:'))
+    require('envinfo').run(
+      {
+        System: ['OS', 'CPU'],
+        Binaries: ['Node', 'npm', 'Yarn'],
+        Browsers: [
+          'Chrome',
+          'Edge',
+          'Firefox',
+          'Safari'
+        ],
+        npmPackages: ['react', 'react-dom', 'react-scripts'],
+        npmGlobalPackages: [packageJson.name]
+      },
+      {
+        duplicates: true,
+        showNotFound: true,
+        fullTree: true
+      }
+    ).then(console.log)
+  })
+
+program
+  .command('ui')
+  .description('starting react-library ui...')
+  .option('-H, --host <host>', 'host ')
+  .option('-p, --port <port>', 'Port')
+  .action(cmd => {
+    const { port, host } = formatArgs(cmd)
+  })
+
+program.parse(process.argv)
+
+function formatArgs (cmd) {
+  const args = {}
+  cmd.options.forEach(o => {
+    const key = camelize(o.long.replace(/^--/, ''))
+    if (typeof cmd[key] !== 'function' && typeof cmd[key] !== 'undefined') {
+      args[key] = cmd[key]
+    }
+  })
+  return args
+}
