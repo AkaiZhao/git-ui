@@ -1,7 +1,7 @@
 <template lang="pug">
   div
-    .title Project Manager
-    v-tabs
+    .h1.title.text-center Project Manager
+    v-tabs.d-flex.justify-center
       v-tab(:to="{name:'ImportProject'}") import
       v-tab(:to="{name:'ProjectList'}") list
     router-view

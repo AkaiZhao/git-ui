@@ -1,18 +1,19 @@
 <template lang="pug">
-.home
-  h3 Actions
-  button init git
-  label allowHidden
-  input(type='checkbox' v-model='allowHidden')
-  label folderOnly
-  input(type='checkbox' v-model='folderOnly')
-  .folder-path
-    v-breadcrumbs(:items="folderPath")
-      template(v-slot:item="{ item }")
-        v-breadcrumbs-item(@click='getFolder(item.path)') {{item.name}}
-  .folder-path
-    template(v-for='item in folderPath')
-      .folder-path-button(@click='getFolder(item.path)' :key='item.name') {{item.name}}
+.folder-explorer.mx-2
+  .mt-3.mb-4.d-flex.align-center.folder-bar
+    .folder-path.d-flex.align-center.px-3.py-2.rounded
+      template(v-for='item in folderPath')
+        .folder-path-button(@click='getFolder(item.path)' :key='item.name') {{item.name}}
+    .folder-options.px-1.py-1.ml-1.rounded
+      v-menu(bottom left :close-on-content-click="false")
+        template(v-slot:activator="{ on, attrs }")
+          v-btn(  icon v-bind="attrs" v-on="on")
+            v-icon mdi-dots-vertical
+        v-list
+          v-list-item
+            v-switch(v-model="allowHidden" label="allow hidden")
+          v-list-item
+            v-switch(v-model="folderOnly" label="folder only")
   .folder-list
     div(v-for='folder in folders' :key='folder.name')
       .folder-list-item(:class='{ hidden: folder.state.hidden }' @click='getFolder(folder.path)')
@@ -89,14 +90,12 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.folder-path {
-  display: flex;
-  margin-bottom: 20px;
-  margin-top: 10px;
+.folder-options{
   background-color: #eee;
-  align-items: center;
-  padding: 8px 12px;
-  border-radius: 4px;
+}
+.folder-path {
+  background-color: #eee;
+  flex:1;
   &-button {
     cursor: pointer;
     border-radius: 2px;
