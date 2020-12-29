@@ -1,15 +1,10 @@
-<template>
-<div>
-  <div>Project Manager</div>
-  <ul>
-    <li><router-link :to="{name:'ImportProject'}">import</router-link></li>
-    <li><router-link :to="{name:'ProjectList'}">list</router-link></li>
-    <li>tab3</li>
-  </ul>
-  <div>
-    <router-view />
-  </div>
-</div>
+<template lang="pug">
+  div
+    .title Project Manager
+    v-tabs
+      v-tab(:to="{name:'ImportProject'}") import
+      v-tab(:to="{name:'ProjectList'}") list
+    router-view
 </template>
 <script>
 export default {

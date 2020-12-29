@@ -1,9 +1,10 @@
 {
-  "name": "create-react-library",
+  "name": "git-ui",
   "private": true,
   "main": "index.js",
+  "version": "0.0.2",
   "bin": {
-    "create-react-library": "bin/command"
+    "git-ui": "bin/command"
   },
   "workspaces": [
     "src/ui"
@@ -12,7 +13,8 @@
   "author": "Akai <keivn910171@gmail.com>",
   "license": "MIT",
   "scripts": {
-    "ii": "npm uninstall create-react-library -g && npm i -g",
+    "ii": "npm i -g",
+    "prepublishOnly": "yarn workspace ui build",
     "serve-ui": "yarn workspace ui build --watch",
     "serve": "nodemon ./src/server/index.js",
     "r": "create-react-library",
@@ -22,10 +24,6 @@
   "devDependencies": {
     "@vue/cli-plugin-eslint": "~4.5.0",
     "babel-eslint": "^10.1.0",
-    "camelize": "^1.0.0",
-    "chalk": "^4.1.0",
-    "commander": "^6.2.1",
-    "envinfo": "^7.7.3",
     "eslint": "^7.16.0",
     "eslint-config-standard": "^16.0.2",
     "eslint-plugin-import": "^2.22.1",
@@ -42,6 +40,10 @@
     "nanoid": "^3.1.20",
     "nodemon": "^2.0.6",
     "simple-git": "^2.31.0",
-    "winattr": "^3.0.0"
+    "winattr": "^3.0.0",
+    "camelize": "^1.0.0",
+    "chalk": "^4.1.0",
+    "commander": "^6.2.1",
+    "envinfo": "^7.7.3"
   }
 }

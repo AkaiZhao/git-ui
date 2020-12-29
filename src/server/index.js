@@ -19,3 +19,6 @@ const port = process.env.PORT || 8080
 app.listen(port, () => {
   console.log(`Ready on: ${chalk.cyan(`http://localhost:${port}`)} `)
 })
+app.on('error', () => {
+  console.log('error')
+})

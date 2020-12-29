@@ -3,10 +3,9 @@
 const chalk = require('chalk')
 const program = require('commander')
 const camelize = require('camelize')
-const packageJson = require('../../package.json')
 
 program
-  .version(`@react-lib ${require('../../package.json').version}`)
+  .version(`@react-lib ${require('../package.json').version}`)
   .usage('<command> [options]')
 
 program
@@ -30,9 +29,7 @@ program
           'Edge',
           'Firefox',
           'Safari'
-        ],
-        npmPackages: ['react', 'react-dom', 'react-scripts'],
-        npmGlobalPackages: [packageJson.name]
+        ]
       },
       {
         duplicates: true,
@@ -49,6 +46,7 @@ program
   .option('-p, --port <port>', 'Port')
   .action(cmd => {
     const { port, host } = formatArgs(cmd)
+    require('./serve')({ port, host })
   })
 
 program.parse(process.argv)
