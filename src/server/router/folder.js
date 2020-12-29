@@ -4,15 +4,15 @@ const path = require('path')
 const winattr = require('winattr')
 const isWindows = process.platform.indexOf('win') === 0
 
-const folder = express.Router()
+const folderRouter = express.Router()
 
-folder.use((req, res, next) => {
+folderRouter.use((req, res, next) => {
   console.log('Time:', new Date())
   console.log('Url: ', req.originalUrl)
   next()
 })
 
-folder.get('/', async (req, res) => {
+folderRouter.get('/', async (req, res) => {
   try {
     const path = req.query.path || process.cwd()
     const folders = await getPaths(path)
@@ -26,7 +26,7 @@ folder.get('/', async (req, res) => {
   }
 })
 
-module.exports = folder
+module.exports = folderRouter
 
 const getPaths = async (basePath) => {
   let dirPath = basePath

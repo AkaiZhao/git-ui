@@ -2,28 +2,28 @@ const express = require('express')
 const { nanoid } = require('nanoid')
 const db = require('../lowdb')
 
-const project = express.Router()
+const projectRouter = express.Router()
 
-project.use((req, res, next) => {
+projectRouter.use((req, res, next) => {
   console.log('Time:', new Date())
   next()
 })
 
-project.get('/', (req, res) => {
+projectRouter.get('/', (req, res) => {
   res.json({
     data: db.get('projects').value() || [],
     message: 'success'
   })
 })
 
-project.get('/import', (req, res) => {
+projectRouter.get('/import', (req, res) => {
   saveProject(req.query)
   res.json({
     message: 'success'
   })
 })
 
-module.exports = project
+module.exports = projectRouter
 
 const getProjectName = (folder) => {
   try {

@@ -1,11 +1,12 @@
 <template>
-  <div ref="gitGraphRef" id="git"></div>
+  <div ref="gitGraphRef" id="git">123</div>
 </template>
 
 <script>
-// import { createGitGraph } from '@gitgraph/js'
+import { execGit } from '@/service/git'
 export default {
   mounted () {
+    execGit('log')
     // const el = document.getElementById('git')
     // const gitGraph = createGitGraph(el)
     // const master = gitGraph.branch('master')
