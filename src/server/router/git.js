@@ -7,10 +7,16 @@ gitRouter.use((req, res, next) => {
   console.log('Time:', new Date())
   next()
 })
+gitRouter.get('/default', (req, res) => {
+  const path = req.query.path
+  if (!path) return res.status(400).json({ error: 400, message: 'no path' })
+  options.baseDir = path
+  res.json({})
+})
 
 gitRouter.get('/', async (req, res) => {
-  console.log(req)
-  const data = await git.log()
+  const git = simpleGit(options)
+  const data = await git.log({})
   res.json({
     data,
     message: 'success'
@@ -24,5 +30,3 @@ const options = {
   binary: 'git',
   maxConcurrentProcesses: 6
 }
-
-const git = simpleGit(options)
