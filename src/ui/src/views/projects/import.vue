@@ -1,5 +1,5 @@
 <template lang="pug">
-.folder-explorer.mx-2
+.folder-explorer
   .mt-3.mb-4.d-flex.align-center.folder-bar
     .folder-path.d-flex.align-center.px-3.py-2.rounded
       template(v-for='item in folderPath')

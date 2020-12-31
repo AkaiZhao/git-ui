@@ -1,12 +1,11 @@
-<template>
-  <div>
-    <div>
-      <h3>List</h3>
-    </div>
-    <pre>
-      {{projects}}
-    </pre>
-  </div>
+<template lang="pug">
+
+v-card.mx-auto(max-width="1100")
+  v-list(dense)
+    v-list-item-group
+      v-list-item(v-for="project in projects" :key="project.id")
+        v-list-item-content
+          v-list-item-title {{project.name}}
 </template>
 
 <script>
@@ -22,7 +21,7 @@ export default {
   methods: {
     async getProject (path) {
       const data = await getProject()
-      this.projects = data
+      this.projects = data.data
     }
   }
 }

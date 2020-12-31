@@ -4,7 +4,9 @@
     v-tabs.d-flex.justify-center
       v-tab(:to="{name:'ImportProject'}") import
       v-tab(:to="{name:'ProjectList'}") list
-    router-view
+    keep-alive
+      div.mx-2.my-2
+        router-view
 </template>
 <script>
 export default {

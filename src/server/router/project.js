@@ -22,10 +22,16 @@ projectRouter.get('/', (req, res) => {
 })
 
 projectRouter.get('/import', (req, res) => {
-  saveProject(req.query)
-  res.json({
-    message: 'success'
-  })
+  try {
+    saveProject(req.query)
+    res.json({
+      message: 'success'
+    })
+  } catch (err) {
+    return res.status(400).json({
+      message: err.message
+    })
+  }
 })
 
 module.exports = projectRouter

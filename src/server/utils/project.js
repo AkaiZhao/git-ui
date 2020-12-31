@@ -16,10 +16,18 @@ const getDBProjects = () => {
 }
 
 const saveProject = ({ name, path }) => {
+  checkProjectExist(path)
+
   const id = nanoid(7)
   if (!name) name = getProjectName(path)
   const project = { id, name, path }
   db.get('projects').push(project).write()
+}
+
+const checkProjectExist = (newPath) => {
+  const data = db.get('projects').value()
+  const isExist = data.find(({ path }) => newPath === path)
+  if (isExist) throw Error(`${newPath} is exist.`)
 }
 
 module.exports = {
